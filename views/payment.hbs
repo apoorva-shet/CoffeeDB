@@ -1,0 +1,52 @@
+{{#if loggedIn}}
+      {{#if username }}
+      <h2>Payment Page</h2>
+      <table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Username</th>
+      <th scope="col">latte</th>
+      <th scope="col">expresso</th>
+      <th scope="col">blackcoffee</th>
+      <th scope="col">mocha</th>
+      <th scope="col">Total</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">{{id}}</th>
+      <td>{{username}}</td>
+      <td>{{latte}}</td>
+      <td>{{expresso}}</td>
+      <td>{{blackcoffee}}</td>
+      <td>{{mocha}}</td>
+      <td>{{actualAmount}}</td>
+    </tr>
+  </tbody>
+</table>
+<br><br>
+
+  <form action="/payment/purchase" method="POST">
+  <script
+      src="https://checkout.razorpay.com/v1/checkout.js"
+      data-key="rzp_test_Yk14knpeAmG7pi"
+      data-amount={{toPay}}
+      data-buttontext="Pay with Razorpay"
+      data-name="cash"
+      data-description="Purchase Description"
+      data-image="https://your-awesome-site.com/your_logo.jpg"
+      data-prefill.name={{username}}
+      data-prefill.email="support@razorpay.com"
+      data-theme.color="#F37254"
+      data-order_id = {{order_id}}
+  ></script>
+  <input type="hidden" value="Hidden Element" name="hidden">
+  </form>
+  </div>
+</body>
+
+
+{{/if}}
+    {{/if}}

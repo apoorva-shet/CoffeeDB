@@ -1,0 +1,494 @@
+
+{{#if isAdmin}}
+
+<h1>Admin</h1>
+
+<table class="table table-striped table-dark">
+  <thead>
+    <tr>
+      <th scope="col">Username</th>
+      <th scope="col">Latte</th>
+      <th scope="col">Mocha</th>
+      <th scope="col">Black Coffee</th>
+      <th scope="col">Expresso</th>
+      <th scope="col">Toggler</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each data}}
+      <tr>
+        <th scope="row">{{this.username}}</th>
+        <td>{{this.latte}}</td>
+        <td>{{this.mocha}}</td>
+        <td>{{this.blackcoffee}}</td>
+        <td>{{this.expresso}}</td>
+        <td><button type="button" class="btn btn-info" onclick="toggleStatus({{this.id}})">Toggle</button></td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
+
+<script>
+  function toggleStatus(id){
+    var jsonToBeSend = {
+      "id" : id
+    };
+
+    fetch('http://localhost:3000/toggleStatus', {
+        method: 'POST',
+        body: JSON.stringify(jsonToBeSend),
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8'
+        }
+    });
+
+    window.location.reload();
+
+
+  }
+</script>
+
+{{else}}
+
+  {{#if loggedIn}}
+      {{#if username }}
+          {{!-- <p>Welcome : {{username}}</p> --}}
+
+      <section id="hero" class="d-flex align-items-center">
+          <div class="container">
+              <div class="row">
+                  <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1" data-aos="fade-up" data-aos-delay="200">
+                  <h1 style="color: brown;">Smart Coffee House</h1>
+                  <h3>We are team of talented Coffee Drinkers</h3><br>    
+                  <div class="d-lg-flex">
+                      <br>
+                      <button type="button" class="btn btn-outline-info"><a href="#about" class="btn-get-started scrollto" style="color: black;">Know More About Us</a></button>
+                      
+                      {{!-- <a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" class="venobox btn-watch-video" data-vbtype="video" data-autoplay="true"> Watch Video <i class="icofont-play-alt-2"></i></a> --}}
+                  </div>
+                  </div>
+                  <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="200" style="height: 60%;">
+                  <img src="assets/img/hero-img.png" class="img-fluid animated" alt="">
+                  {{!-- <img src="assets/img/coffeehouse.png" class="img-fluid animated" alt=""> --}}
+                  </div>
+              </div>
+          </div>
+      </section>
+      <hr>
+      <hr>
+      <section id="about" class="about">
+          <div class="container" data-aos="fade-up">
+
+              <div class="section-title">
+                  <em><h2>About Us</h2></em><br>
+              </div>
+
+              <div class="row content">
+                  <div class="col-lg-6">
+                      <p>
+                      Coffee House, a part of Coffee Day Global Limited, is India’s favourite hangout for coffee and conversations. Popularly known as CH, we strive to provide the best experience to our guests.
+                          Our coffees are sourced from thousands of small coffee planters, who made us who we are today and we're glad to be a part of their lives. We opened our first cafe in 2020 at Carter Road in Mumbai
+                          – the youth and the young at heart immediately took to the cafe, and it continues to be one of the most happening places in the city. 
+                      </p>
+                  </div>
+                  <div class="col-lg-6 pt-4 pt-lg-0">
+                      <p>
+                      CH to the youth is a “hangout” spot where they meet people, 
+                          make conversations, and have a whole lot of fun over steaming cups of great coffee.It's been an exciting journey since then to becoming the largest organised retail cafe chain in the country.
+                          We’re also present in Banglaore, Pune and Hyderabad, so if your travel takes you there, do stop by our outlets to get a taste from back home!
+                      </p>
+                      <a href="https://instagram.com" class="btn-learn-more">Learn More</a>
+                  </div>
+              </div>
+          </div>
+
+      </section><!-- End About Us Section -->
+      <div class="col-md-3" style="margin: auto;">
+          <hr style="border: 1px solid palevioletred;">
+      </div>
+      <div style="margin: auto;">
+          <img style="box-shadow: 10px -10px 5px #CCC; display: block;
+                      margin-left: auto;
+                      margin-right: auto;
+                      width: 50%;" 
+              src="assets/img/coffeehouse.png" class="img-fluid animated" alt="" height="250px" width="700px">
+      </div>
+        
+      <hr><hr>
+
+      <section id="services" class="services section-bg">
+        <div class="container" data-aos="fade-up">
+
+          <div class="section-title">
+            <em><h2>Products</h2></em><br>
+            <p>Not only can your daily cup of joe help you feel more energized, burn fat and improve physical performance, it may also lower your risk of several conditions, such as type 2 diabetes, cancer and Alzheimer's and Parkinson's disease.</p>
+          </div>
+          <div class="col-md-6" style="margin: auto;">
+              <hr style="border: 3px solid rgb(75, 102, 221);">
+
+          </div>
+
+          <div class="row">
+            <div class="col-xl-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+              <div class="card" style="width:400px">
+                  <img class="card-img-top" src="assets/img/mocha.jpg" alt="Card image" style="width:100%">
+                  <div class="card-body">
+                      <h4 class="card-title">Mocha</h4>
+                      <p class="card-text">A caffè mocha, also called mocaccino, is a chocolate-flavoured variant of a caffè latte</p>
+                      {{!-- <a href="#" class="btn btn-primary stretched-link">See More</a> --}}
+                      <div class="quantity" style="text-align: center;">
+                          <button class="plus-btn" type="button" name="button" onclick="addMO()">
+                              <img src="assets/img/plus.svg" alt="" height="10px" width="10px"/>
+                          </button>
+                          <input type="text" name="name" value="1" id="mochaCount" style="width: 32px;">
+                          <button class="minus-btn" type="button" name="button" onclick="subMO()">
+                              <img src="assets/img/minus.svg" alt="" height="10px" width="10px" />
+                          </button>
+                      </div>
+                  </div>
+              </div>
+            </div>
+
+            <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200">
+              <div class="card" style="width:400px">
+                  <img class="card-img-top" src="assets/img/latte.jpg" alt="Card image" style="width:100%" >
+                  <div class="card-body">
+                      <h4 class="card-title">Latte</h4>
+                      <p class="card-text">Caffe latte is a coffee drink made with espresso and steamed milk which refreshes your mind</p>
+                      <div class="quantity" style="text-align: center;">
+                          <button class="plus-btn" type="button" name="button" onclick="addLA()">
+                              <img src="assets/img/plus.svg" alt="" height="10px" width="10px"/>
+                          </button>
+                          <input type="text" name="name" value="1" id="latteCount" style="width: 32px;">
+                          <button class="minus-btn" type="button" name="button" onclick="subLA()">
+                              <img src="assets/img/minus.svg" alt="" height="10px" width="10px" />
+                          </button>
+                      </div>
+                  </div>
+              </div>
+            </div>
+
+            <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-xl-0" data-aos="zoom-in" data-aos-delay="300">
+              <div class="card" style="width:400px">
+                  <img class="card-img-top" src="assets/img/blackcoffe.jpg" alt="Card image" style="width:100%; height:49%">
+                  <div class="card-body">
+                      <h4 class="card-title">Black Coffee</h4>
+                      <p class="card-text">A caffè mocha, also called mocaccino, is a chocolate-flavoured variant of a caffè latte</p>
+                      <div class="quantity" style="text-align: center;">
+                          <button class="plus-btn" type="button" name="button" onclick="addBC()">
+                              <img src="assets/img/plus.svg" alt="" height="10px" width="10px"/>
+                          </button>
+                          <input type="text" name="name" value="1" id="blackCount" style="width: 32px;">
+                          <button class="minus-btn" type="button" name="button" onclick="subBC()">
+                              <img src="assets/img/minus.svg" alt="" height="10px" width="10px" />
+                          </button>
+                      </div>
+                  </div>
+              </div>
+            </div>
+
+            <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-xl-0" data-aos="zoom-in" data-aos-delay="400">
+              <div class="card" style="width:400px">
+                  <img class="card-img-top" src="assets/img/espresso.jpg" alt="Card image" style="width:100%; height:50%">
+                  <div class="card-body">
+                      <h4 class="card-title">Espresso</h4>
+                      <p class="card-text">Espresso is thicker than coffee brewed by other methods, with a viscosity of warm honey</p>
+                      <div class="quantity" style="text-align: center;">
+                          <button class="plus-btn" type="button" name="button" onclick="addES()">
+                              <img src="assets/img/plus.svg" alt="" height="10px" width="10px"/>
+                          </button>
+                          <input type="text" name="name" value="1" id="expressoCount" style="width: 32px;">
+                          <button class="minus-btn" type="button" name="button" onclick="subES()">
+                              <img src="assets/img/minus.svg" alt="" height="10px" width="10px" />
+                          </button>
+                      </div>
+                  </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+          <div class="col-md-6" style="margin: auto;">
+              <hr style="border: 3px solid rgb(75, 102, 221);">
+              <center><button type="button" class="btn btn-secondary" style="margin: auto; height:50px" onclick="sendRequest()">Buy Now</button></center>
+          </div>
+        
+      </section><!-- End Services Section -->
+      <script>
+
+        //
+        //  EXPRESSO 
+        //
+        function addES(){
+          var currValue = document.getElementById("expressoCount").value;
+          document.getElementById("expressoCount").value = parseInt(currValue) + 1;
+        }
+        function subES(){
+          var currValue = document.getElementById("expressoCount").value;
+          if(parseInt(currValue) <=0){
+            document.getElementById("expressoCount").value = 0;
+          }
+          else{
+            document.getElementById("expressoCount").value = parseInt(currValue) - 1;
+          }
+        }
+
+        //
+        //  BLACK COFFEE
+        //
+        function addBC(){
+          var currValue = document.getElementById("blackCount").value;
+          document.getElementById("blackCount").value = parseInt(currValue) + 1;
+        }
+        function subBC(){
+          var currValue = document.getElementById("expressoCount").value;
+          if(parseInt(currValue) <=0){
+            document.getElementById("blackCount").value = 0;
+          }
+          else{
+            document.getElementById("blackCount").value = parseInt(currValue) - 1;
+          }
+        }
+
+
+        //
+        //  MOCHA 
+        //
+        function addMO(){
+          var currValue = document.getElementById("mochaCount").value;
+          document.getElementById("mochaCount").value = parseInt(currValue) + 1;
+        }
+        function subMO(){
+          var currValue = document.getElementById("mochaCount").value;
+          if(parseInt(currValue) <=0){
+            document.getElementById("mochaCount").value = 0;
+          }
+          else{
+            document.getElementById("mochaCount").value = parseInt(currValue) - 1;
+          }
+        }
+
+        //
+        //  LATTE 
+        //
+        function addLA(){
+          var currValue = document.getElementById("latteCount").value;
+          document.getElementById("latteCount").value = parseInt(currValue) + 1;
+        }
+        function subLA(){
+          var currValue = document.getElementById("latteCount").value;
+          if(parseInt(currValue) <=0){
+            document.getElementById("latteCount").value = 0;
+          }
+          else{
+            document.getElementById("latteCount").value = parseInt(currValue) - 1;
+          }
+        }
+
+      </script>
+      <script>
+        function sendRequest(){
+          var latteCount = document.getElementById("latteCount").value;
+          var mochaCount = document.getElementById("mochaCount").value;
+          var blackCount = document.getElementById("blackCount").value;
+          var expressoCount = document.getElementById("expressoCount").value;
+
+          //var latteCount = 1;
+          //var mochaCount = 1;
+          //var blackCount = 1;
+          //var expressoCount = 1;
+
+          const data = {
+              "latteCount" : latteCount,
+              "mochaCount" : mochaCount,
+              "blackCount" : blackCount,
+              "expressoCount" : expressoCount
+          };
+
+          fetch('http://localhost:3000/', {
+                  method: 'POST',
+                  body: JSON.stringify(data),
+                  headers: {
+                      'Content-type': 'application/json; charset=UTF-8'
+                  }
+              }).then((data) => window.location.replace(data.url))
+              
+          window.alert("Your Request has been Successfully Saved in the Database")
+        }
+
+      </script>
+      <hr>
+      <hr>
+      <section id="contact" class="contact" style="background-color: rgb(228, 228, 243);">
+        <div class="container" data-aos="fade-up">
+
+          <div class="section-title">
+            <em><h2>Contact Us</h2></em><br>
+            <p>We are always at your service. Just a call away!</p>
+            </div>
+
+          <div class="row">
+
+            <div class="col-lg-5 d-flex align-items-stretch">
+              <div class="info">
+                <div class="address">
+                  <i class="icofont-google-map"></i>
+                  <h4>Location:</h4>
+                  <p>A108 Adam Street, Bandra West, Mumbai 4001021</p>
+                </div>
+
+                <div class="email">
+                  <i class="icofont-envelope"></i>
+                  <h4>Email:</h4>
+                  <p>info@ch.com</p>
+                </div>
+
+                <div class="phone">
+                  <i class="icofont-phone"></i>
+                  <h4>Call:</h4>
+                  <p>+91 9289 5548 85</p>
+                </div>
+                  
+              </div>
+
+            </div>
+            <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items">
+                
+              <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="name">Your Name</label>
+                    <input type="text" name="name" class="form-control" id="name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                    <div class="validate"></div>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="name">Your Email</label>
+                    <input type="email" class="form-control" name="email" id="email" data-rule="email" data-msg="Please enter a valid email" />
+                    <div class="validate"></div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="name">Subject</label>
+                  <input type="text" class="form-control" name="subject" id="subject" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
+                  <div class="validate"></div>
+                </div>
+                <div class="form-group">
+                  <label for="name">Message</label>
+                  <textarea class="form-control" name="message" id="mess" rows="10" data-rule="required" data-msg="Please write something for us"></textarea>
+                  <div class="validate"></div>
+                </div>
+                <div class="text-center"><button type="submit" onclick="sendMail()">Send Message</button></div><br>
+              </form>
+            </div>
+
+          </div>
+
+        </div>
+      </section><!-- End Contact Section -->
+      <script>
+          function sendMail(){
+              //apoorvashet11@gmail.com 
+              var sub = document.getElementById("subject").value;
+              var to = "apoorvashet11@gmail.com"; 
+              var mess = document.getElementById("mess").value;
+              window.location.href = "mailto:"+to+"?subject="+sub+"&body="+mess;
+          }
+          
+      </script>
+      <hr><hr>
+      <!-- ======= Footer ======= -->
+          <footer id="footer" style="background-image: linear-gradient(rgb(217, 212, 252), rgb(127, 151, 245));">
+
+              <div class="footer-top">
+              <div class="container">
+                  <div class="row">
+
+                  <div class="col-lg-3 col-md-6 footer-contact">
+                      <h3>CH</h3>
+                      <p>
+                      A108 Adam Street,  <br>
+                      Bandra West, Mum 4001021<br>
+                      India <br><br>
+                      <strong>Phone:</strong> +91 9289 5548 85<br>
+                      <strong>Email:</strong> info@ch.com<br>
+                      </p>
+                  </div>
+
+                  <div class="col-lg-3 col-md-6 footer-links">
+                      <h4>Useful Links</h4>
+                      <ul>
+                      <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
+                      <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
+                      <li><i class="bx bx-chevron-right"></i> <a href="#">Products</a></li>
+                      </ul>
+                  </div>
+
+                  <div class="col-lg-3 col-md-6 footer-links">
+                      <h4>Our Products</h4>
+                      <ul>
+                      <li><i class="bx bx-chevron-right"></i> <a href="#services">Latte</a></li>
+                      <li><i class="bx bx-chevron-right"></i> <a href="#services">Expresso</a></li>
+                      <li><i class="bx bx-chevron-right"></i> <a href="#services">PBlack Coffe</a></li>
+                      <li><i class="bx bx-chevron-right"></i> <a href="#services">Mocha</a></li>
+                      </ul>
+                  </div>
+
+                  <div class="col-lg-3 col-md-6 footer-links">
+                      <h4>Our Social Networks</h4>
+                      <p>Connect With Us</p>
+                      <div class="social-links mt-3">
+                      {{!-- PUT YOUR SOCIAL MEDIA LINKS HERE --}}
+                      </div>
+                  </div>
+
+                  </div>
+              </div>
+              </div>
+
+              <div class="container footer-bottom clearfix" style="text-align: center;">
+              <div class="copyright">
+                  &copy; Copyright <strong><span>CH</span></strong>. All Rights Reserved
+              </div>
+              <div class="credits">
+                Designed by <a href="https://instagram.com/">Princeton</a><hr>
+              </div>
+              </div>
+          </footer><!-- End Footer -->
+
+          <a href="#" class="back-to-top"><i class="ri-arrow-up-line"></i></a>
+          <div id="preloader"></div>
+
+          <!-- Vendor JS Files -->
+          <script src="assets/vendor/jquery/jquery.min.js"></script>
+          <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+          <script src="assets/vendor/jquery.easing/jquery.easing.min.js"></script>
+          <script src="assets/vendor/php-email-form/validate.js"></script>
+          <script src="assets/vendor/waypoints/jquery.waypoints.min.js"></script>
+          <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+          <script src="assets/vendor/venobox/venobox.min.js"></script>
+          <script src="assets/vendor/owl.carousel/owl.carousel.min.js"></script>
+          <script src="assets/vendor/aos/aos.js"></script>
+
+          <!-- Template Main JS File -->
+          <script src="assets/js/main.js"></script>
+
+      {{/if}}
+
+
+  {{else}}
+  <div class="container" style="text-align:center">
+    <h2 style="color: rgb(248, 32, 32);">Welcome to Smart Coffee House</h2>
+    <hr class="col-md-3">
+    <p> If your a <em><b>Coffee Lover</b></em>, you have hit the right place. Join us in appreciating the coffee love!</p> 
+
+    <p>Please login or Create a new account to get access to our mouth watering collections of coffee's</p>
+
+    <h6>Hope to See You on the other side</h6>
+    <hr class="col-md-2">
+    <button type="button" class="btn btn-outline-success"><a href="/login" style="color: black;">Please Login</a></button>
+  </div>
+
+  {{/if}}
+
+{{/if}}
